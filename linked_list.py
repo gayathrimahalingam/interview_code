@@ -24,6 +24,7 @@ class LinkedList:
         while thead is not None:
             print (thead.value)
             thead = thead.next 
+        print ""
 
     def insertDataAtBeg(self, newdata):
         newnode = Node(value=newdata)
@@ -71,4 +72,12 @@ class LinkedList:
 
             prev.next = thead.next
             thead = None  
+    
 
+if __name__=="__main__":
+    data = [2, 3, 10, 8, 5]
+    linklist = LinkedList()
+    for d in data:
+        linklist.insertDataAtBeg(d)
+    
+    linklist.printList()
