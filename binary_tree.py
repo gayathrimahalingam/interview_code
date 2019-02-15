@@ -5,6 +5,7 @@ class BTree:
         self.left = None
         self.right = None
         self.data = data
+        self.parent = None
 
     def insert(self, data):
         if self.data:
@@ -64,3 +65,38 @@ class BTree:
             if self.right is None:
                 return "Not found"
             return self.right.findval(searchval)
+
+def createMinimalBST(array):
+    return createMinimalBSTree(array, 0, len(array)-1)
+
+def createMinimalBSTree(array, start, end):
+    if end < start:
+        return None
+    
+    mid = (start + end) / 2
+    n = BTree(array[mid])
+    n.left = createMinimalBSTree(array, start, mid-1)
+    n.right = createMinimalBSTree(array, mid+1, end)
+    return n
+
+def printTree(root):
+    if root is None:
+        return
+    elif root.left is None and root.right is None:
+        print(root.data)
+        return
+    else:
+        print(root.data)
+        printTree(root.left)
+        printTree(root.right)
+        return
+
+if __name__=="__main__":
+    array = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+    tree_root = createMinimalBST(array)
+    #printTree(tree_root)
+    res = tree_root.inorderTraversal(tree_root)
+    print(res)
+    res = tree_root.preorderTraversal(tree_root)
+    print(res)

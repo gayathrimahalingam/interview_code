@@ -18,6 +18,10 @@ class Node:
 class LinkedList:
     def __init__(self):
         self.head = None
+        self.currentsize = 0
+
+    def size(self):
+        return self.currentsize
 
     def printList(self):
         thead = self.head
@@ -26,10 +30,23 @@ class LinkedList:
             thead = thead.next 
         print ""
 
+    def insertAtEnd(self, newdata):
+        newnode = Node(value=newdata)
+        if self.head is None:
+            self.head = newnode
+        else:
+            runner = self.head
+            while (runner.next is not None):
+                runner = runner.next
+            runner.next = newnode
+            newnode.next = None
+        self.currentsize += 1
+
     def insertDataAtBeg(self, newdata):
         newnode = Node(value=newdata)
         newnode.next = self.head
         self.head = newnode 
+        self.currentsize += 1
 
     def insertDataBefore(self, newdata, beforedata):
         prev = self.head
@@ -37,6 +54,7 @@ class LinkedList:
         if current is None:
             newnode = Node(value=newdata)
             self.head = newnode
+            self.currentsize += 1
             return # or continue
         while (current.value != beforedata) or (current is not None):
             prev = current
@@ -45,6 +63,7 @@ class LinkedList:
             newnode = Node(value=newdata)
             prev.next = newnode
             newnode.next = current 
+            self.currentsize += 1
         else:
             # the beforedata does not exist in the list
             # raise some error or do nothing
@@ -59,6 +78,7 @@ class LinkedList:
             # the node to be removed is the head
             self.head = thead.next
             thead = None
+            self.currentsize -= 1
             return
         else:
             prev = None
@@ -72,6 +92,7 @@ class LinkedList:
 
             prev.next = thead.next
             thead = None  
+            self.currentsize -= 1
     
 
 if __name__=="__main__":

@@ -7,15 +7,15 @@ class Stack:
         self.stack = []
 
     def push(self, value):
-        if value not in self.stack:
-            self.stack.append(value)
-            return True
-        else:
-            return False
+        self.stack.append(value)
+        return True
         
     def peek(self):
         # peek to look at top of the stack
         return self.stack[-1]
+
+    def is_empty(self):
+        return self.stack == []
 
     def remove(self):
         if len(self.stack) <= 0:
@@ -27,3 +27,6 @@ class Stack:
 
             # the other way is 
             # return self.stack.pop()
+    
+    def printStack(self):
+        print(self.stack)
