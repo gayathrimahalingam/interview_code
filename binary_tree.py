@@ -1,5 +1,7 @@
 ### implementing a binary tree using node class
 
+import math
+
 class BTree:
     def __init__(self, data):
         self.left = None
@@ -73,7 +75,8 @@ def createMinimalBSTree(array, start, end):
     if end < start:
         return None
     
-    mid = (start + end) / 2
+    mid = int(math.ceil((start + end) / 2))
+    
     n = BTree(array[mid])
     n.left = createMinimalBSTree(array, start, mid-1)
     n.right = createMinimalBSTree(array, mid+1, end)
@@ -90,6 +93,35 @@ def printTree(root):
         printTree(root.left)
         printTree(root.right)
         return
+
+def inOrderPredecessor(root, node):
+    # assumes you need a parent node link
+    parent = None
+
+    # traverse to the left node's right most node for predecessor
+    if node.left is not None:
+        temp = node.left 
+        while(temp.right is not None):
+            temp = temp.right 
+        return temp
+    
+    # start from root and move to left or right based on value
+    # if moving right keep track of the parent (that will be the predecessor)
+    temp = root 
+    while ( temp != node):
+        if node.data < temp.data:
+            temp = temp.left 
+        else:
+            parent = temp
+            temp = temp.right
+    
+    if temp == node:
+        return parent
+    else:
+        return None
+
+
+    
 
 if __name__=="__main__":
     array = [1, 2, 3, 4, 5, 6, 7, 8, 9]

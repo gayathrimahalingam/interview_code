@@ -6,6 +6,7 @@ from graph import breadthfirstsearch
 
 # Solution: A simple breadth first or depth first search will work here
 # solution in graph.py file
+# or dijkstra's algorithm to find the shortest path
 
 
 if __name__=="__main__":

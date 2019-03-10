@@ -4,6 +4,7 @@
 # also a modified breadt first search works
 # add root to linked list, then traverse each element in this linked list and create a new list
 
+# write a routine to create linked list of all siblings
 
 import os 
 from linked_list import LinkedList
@@ -26,6 +27,27 @@ def createLevelLinkedList(root):
             if (parents.value.right is not None):
                 current.insertAtEnd(parents.value.right)
             parents = parents.next
+    return result
+
+# using array instead of linked lists
+def connectSiblings(root):
+    result = []
+    current = []
+
+    if root is not None:
+        current.append(root)
+
+    while(len(current) > 0):
+        result.append(current)
+        parents = current
+        current = []
+        for p in parents:
+            if p.left is not None:
+                current.append(p.left)
+
+            if p.right is not None:
+                current.append(p.right)
+
     return result
 
 def printResult(result):
